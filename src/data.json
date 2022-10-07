@@ -1,10 +1,20 @@
 [
     {
-        "name": "chocolate",
-        "price": 10000
+        "id": 1,
+        "item": "Chocolate",
+        "price": 10000,
+        "discount": 10
     },
     {
-        "name": "mineral water",
-        "price": 5000
+        "id": 2,
+        "item": "Mineral Water",
+        "price": 5000,
+        "discount": 5
+    },
+    {
+        "id": 3,
+        "item": "Matcha Tea",
+        "price": 4000,
+        "discount": 3
     }
 ]
