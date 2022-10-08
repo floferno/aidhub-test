@@ -14,11 +14,17 @@ function App() {
     setDiscount(e.target.value)
   }
 
+  function numberWithCommas(x) {
+    var parts = x.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(",");
+  }
+
   return (
     <Router>
-      <Routes>\
-        <Route path="/" element={<HomePage discount={discount} setDiscount={setDiscount} onChange={onChange} />} />
-        <Route path="/pos" element={<POSPage discount={discount} />} />
+      <Routes>
+        <Route path="/" element={<HomePage discount={discount} setDiscount={setDiscount} onChange={onChange} numberWithCommas={numberWithCommas} />} />
+        <Route path="/pos" element={<POSPage discount={discount} numberWithCommas={numberWithCommas} />} />
       </Routes>
     </Router>
   );

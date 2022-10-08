@@ -3,7 +3,7 @@ import MainLayout from '../layouts/MainLayout'
 import { useEffect } from 'react'
 import data from '../data.json'
 
-export default function POSPage({value, discount}) {
+export default function POSPage({value, discount, numberWithCommas}) {
     return (
         <MainLayout>
             <table className="table table-light table-responsive m-5 text-nowrap">
@@ -19,22 +19,16 @@ export default function POSPage({value, discount}) {
             </thead>
             <tbody>
                 {data.map((el, i)=> {
-                    const grandTotal = el.price - el.discount + (0.1 * el.price)
-                    function numberWithCommas(x) {
-                        var parts = x.toString().split(".");
-                        parts[0]=parts[0].replace(/\B(?=(\d{3})+(?!\d))/g,".");
-                        return parts.join(",");
-                    }
-                    numberWithCommas(grandTotal)
-                    console.log(grandTotal)
+                    const grandTotal = el.price - (el.price - (el.discount * el.price)) + (0.1 * el.price)
+                
                     return (
                         <tr key={i}>
                             <th scope="row">{i + 1}</th>
                             <td>{el.item}</td>
-                            <td>{el.price}</td>
-                            <td>{el.discount} % </td>
-                            <td>10 %</td>
-                            <td>{grandTotal}</td>
+                            <td className="text-end">{numberWithCommas(el.price)}</td>
+                            <td className="text-end">{el.discount} % </td>
+                            <td className="text-end">10 %</td>
+                            <td className="text-end">{numberWithCommas(grandTotal)}</td>
                         </tr>
                     )
                 })
@@ -44,10 +38,8 @@ export default function POSPage({value, discount}) {
         </table>
         <div>
             <p className="grand-total">Grand Total</p>
-            <p>{}</p>
+            <p></p>
         </div>
-
         </MainLayout>
-
     )
 }

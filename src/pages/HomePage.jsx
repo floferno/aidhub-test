@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import data from '../data.json'
 
-export default function HomePage({discount, setDiscount, onChange}) {
+export default function HomePage({discount, setDiscount, onChange, numberWithCommas}) {
     return (
         <MainLayout>
             <table className="table table-light table-responsive m-5 text-nowrap">
@@ -17,11 +17,12 @@ export default function HomePage({discount, setDiscount, onChange}) {
                 </thead>
                 <tbody>
                     {data.map((el, i)=> {
+                        
                         return (
                             <tr key={i}>
                                 <th scope="row">{i + 1}</th>
                                 <td>{el.item}</td>
-                                <td>{el.price}</td>
+                                <td>{numberWithCommas(el.price)}</td>
                                 <td><input
                                         type="text"
                                         className="input-discount"
